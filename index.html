@@ -5,6 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Making Education Accessible Management (M.E.A)</title>
     <link rel="stylesheet" href="styles/global.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        header {
+            background-color: #0073e6;
+            padding: 15px;
+            color: white;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h1 {
+            color: #0073e6;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #444;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        .feature {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .feature img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        footer {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,70 +85,54 @@
         </nav>
     </header>
     <div id="root">
-        <!-- Large cover image -->
-        <img src="images/cover.jpg" alt="Cover Image" style="width:100%;height:auto;">
-        
-        <!-- Project name -->
+        <img src="images/cover.jpg" alt="Cover Image" style="width:100%;height:auto;border-radius:10px;">
         <h1>Making Education Accessible Management (M.E.A)</h1>
-        
-        <!-- One-line phrase/description -->
         <p>Empowering education through innovative management solutions.</p>
-        
-        <!-- Labeled button to navigate to the deployed project application -->
         <button onclick="window.location.href='https://victorjoseph93.github.io/Victorjoseph93github.io/'">Go to Application</button>
-        
-        <!-- Section highlighting 3 key features -->
         <section id="features">
             <h2>Key Features</h2>
-            
             <div class="feature">
-                <img src="images/student_mgt.jpg" alt="Feature 1 Image" style="width:100%;height:auto;">
-                <h3>Feature 1: Student Management</h3>
-                <p>Efficiently manage student records, attendance, and performance with our comprehensive student management system.</p>
+                <img src="images/student_mgt.jpg" alt="Student Management">
+                <h3>Student Management</h3>
+                <p>Efficiently manage student records, attendance, and performance.</p>
             </div>
-            
             <div class="feature">
-                <img src="images/Teacher_Collaboration.jpg" alt="Feature 2 Image" style="width:100%;height:auto;">
-                <h3>Feature 2: Teacher Collaboration</h3>
-                <p>Enhance teacher collaboration and communication through integrated tools and resources.</p>
+                <img src="images/Teacher_Collaboration.jpg" alt="Teacher Collaboration">
+                <h3>Teacher Collaboration</h3>
+                <p>Enhance communication and collaboration among educators.</p>
             </div>
-            
             <div class="feature">
-                <img src="images/Course_Management.jpg" alt="Feature 3 Image" style="width:100%;height:auto;">
-                <h3>Feature 3: Course Management</h3>
-                <p>Streamline course creation, scheduling, and tracking to ensure a smooth educational experience.</p>
+                <img src="images/Course_Management.jpg" alt="Course Management">
+                <h3>Course Management</h3>
+                <p>Streamline course creation, scheduling, and tracking.</p>
             </div>
         </section>
-        
-        <!-- About section -->
         <section id="about">
             <h2>About This Project</h2>
-            <p>This project was inspired by the need to make education more accessible and manageable for everyone. Our team recognized the challenges faced by educational institutions in managing student records, facilitating teacher collaboration, and organizing courses efficiently. We embarked on this journey in 2025, and after months of hard work and dedication, we are proud to present the Making Education Accessible Management (M.E.A) system.</p>
-            <p>This project is also a Portfolio Project for ALX. You can learn more about ALX <a href="https://www.alxafrica.com">here</a>.</p>
-            
+            <p>This project makes education accessible and manageable through technology.</p>
             <h3>Meet the Team</h3>
             <ul>
                 <li>
-                    <strong>Team Member 1</strong><br>
-                    <a href="https://www.linkedin.com/in/
-victor-joseph-329024239
-">LinkedIn</a> | 
+                    <strong>Victor Joseph</strong><br>
+                    <a href="https://www.linkedin.com/in/victor-joseph-329024239">LinkedIn</a> | 
                     <a href="https://github.com/Victorjoseph93">GitHub</a> | 
                     <a href="https://x.com/Victorkhing1010">Twitter</a>
                 </li>
                 <li>
-                    <strong>Team Member 2</strong><br>
-                    <a href="https://www.linkedin.com/in/chris-ameh-31bb51bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn</a> | 
+                    <strong>Chris Ameh</strong><br>
+                    <a href="https://www.linkedin.com/in/chris-ameh-31bb51bb">LinkedIn</a> | 
                     <a href="https://github.com/Pharmchrisameh1">GitHub</a> | 
                     <a href="https://x.com/ChrisAmeh1">Twitter</a>
                 </li>
-                <!-- Add more team members as needed -->
             </ul>
-            
             <h3>Project Repository</h3>
-            <p>You can find the source code for this project on our <a href="https://github.com/Victorjoseph93/Victorjoseph93github.io/tree/master">GitHub repository</a>.</p>
+            <p>Find the source code on our <a href="https://github.com/Victorjoseph93/Victorjoseph93github.io/tree/master">GitHub repository</a>.</p>
         </section>
     </div>
+    <footer>
+        <p>&copy; 2025 Making Education Accessible (M.E.A)</p>
+    </footer>
     <script src="index.js"></script>
 </body>
 </html>
+
