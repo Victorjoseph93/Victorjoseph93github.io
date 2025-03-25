@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements - M.E.A</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        h1 {
+            color: #0073e6;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        .announcement-list {
+            margin-top: 20px;
+        }
+        .announcement {
+            background: #fff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #0073e6;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Announcements</h1>
+    <p>Post and manage important announcements for students.</p>
+
+    <div class="container">
+        <h2>New Announcement</h2>
+        <textarea id="announcementText" placeholder="Enter your announcement here..." rows="4"></textarea>
+        <button onclick="postAnnouncement()">Post Announcement</button>
+    </div>
+
+    <div class="container">
+        <h2>Past Announcements</h2>
+        <div id="announcementList" class="announcement-list">
+            <!-- Announcements will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        function postAnnouncement() {
+            let announcementText = document.getElementById("announcementText").value;
+
+            if (announcementText === "") {
+                alert("Please enter an announcement.");
+                return;
+            }
+
+            let announcementList = document.getElementById("announcementList");
+
+            let newAnnouncement = document.createElement("div");
+            newAnnouncement.classList.add("announcement");
+            newAnnouncement.innerText = announcementText;
+
+            announcementList.prepend(newAnnouncement); // Add new announcement at the top
+
+            document.getElementById("announcementText").value = ""; // Clear input
+
+            alert("Announcement posted successfully!");
+        }
+    </script>
+
+    <br>
+    <a href="teachers.html">← Back to Teachers Page</a>
+
+</body>
+</html>
+

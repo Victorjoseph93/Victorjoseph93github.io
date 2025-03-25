@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Submission - M.E.A</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        h1 {
+            color: #0073e6;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #0073e6;
+            color: white;
+        }
+        input, select, button {
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Grade Submission</h1>
+    <p>Submit student grades and view records.</p>
+
+    <div class="container">
+        <h2>Submit Grades</h2>
+        <label for="studentName">Select Student:</label>
+        <select id="studentName">
+            <option value="John Doe">John Doe</option>
+            <option value="Jane Smith">Jane Smith</option>
+            <option value="Michael Brown">Michael Brown</option>
+        </select>
+
+        <label for="course">Select Course:</label>
+        <select id="course">
+            <option value="Mathematics">Mathematics</option>
+            <option value="Science">Science</option>
+            <option value="History">History</option>
+        </select>
+
+        <label for="grade">Enter Grade:</label>
+        <input type="text" id="grade" placeholder="Enter grade (A, B, C, etc.)">
+
+        <button onclick="submitGrade()">Submit Grade</button>
+    </div>
+
+    <div class="container">
+        <h2>Grade Records</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Course</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody id="gradeTable">
+                <!-- Grade records will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function submitGrade() {
+            let studentName = document.getElementById("studentName").value;
+            let course = document.getElementById("course").value;
+            let grade = document.getElementById("grade").value;
+
+            if (grade === "") {
+                alert("Please enter a grade before submitting.");
+                return;
+            }
+
+            let table = document.getElementById("gradeTable");
+            let newRow = table.insertRow();
+            newRow.insertCell(0).innerText = studentName;
+            newRow.insertCell(1).innerText = course;
+            newRow.insertCell(2).innerText = grade;
+
+            alert("Grade submitted for " + studentName);
+        }
+    </script>
+
+    <br>
+    <a href="teachers.html">← Back to Teachers Page</a>
+
+</body>
+</html>
+
