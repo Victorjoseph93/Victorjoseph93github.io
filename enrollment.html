@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment - M.E.A</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        h1 {
+            color: #0073e6;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 60%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input, select {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #0073e6;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .back-button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Course Enrollment</h1>
+    <p>Enroll in your desired courses below.</p>
+
+    <form id="enrollment-form">
+        <input type="text" id="student-name" placeholder="Enter your name" required>
+        <select id="course-select" required>
+            <option value="">Select a course</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="English">English</option>
+            <option value="Physics">Physics</option>
+            <option value="Biology">Biology</option>
+            <option value="Computer Science">Computer Science</option>
+        </select>
+        <button type="submit">Enroll</button>
+    </form>
+
+    <h2>Enrolled Courses</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Course</th>
+                <th>Date Enrolled</th>
+            </tr>
+        </thead>
+        <tbody id="enrollment-table">
+            <!-- Enrolled courses will be inserted dynamically here -->
+        </tbody>
+    </table>
+
+    <a href="students.html" class="back-button">← Back to Student Section</a>
+
+    <script>
+        document.getElementById("enrollment-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get user input values
+            const studentName = document.getElementById("student-name").value;
+            const courseName = document.getElementById("course-select").value;
+            const currentDate = new Date().toISOString().split('T')[0]; // Get today's date
+
+            if (studentName === "" || courseName === "") {
+                alert("Please enter your name and select a course.");
+                return;
+            }
+
+            // Create a new row for the table
+            const tableBody = document.getElementById("enrollment-table");
+            const newRow = `<tr>
+                <td>${studentName}</td>
+                <td>${courseName}</td>
+                <td>${currentDate}</td>
+            </tr>`;
+
+            tableBody.innerHTML += newRow;
+
+            // Clear form fields after submission
+            document.getElementById("student-name").value = "";
+            document.getElementById("course-select").value = "";
+        });
+    </script>
+
+</body>
+</html>
+

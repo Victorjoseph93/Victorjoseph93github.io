@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments & Submissions - M.E.A</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        h1 {
+            color: #0073e6;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #0073e6;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+        }
+        input {
+            width: 60%;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .back-button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Assignments & Submissions</h1>
+    <p>Check available assignments and submit your work here.</p>
+
+    <div class="container">
+        <h2>Available Assignments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Assignment Title</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mathematics</td>
+                    <td>Algebra Homework</td>
+                    <td>March 30, 2025</td>
+                </tr>
+                <tr>
+                    <td>Computer Science</td>
+                    <td>JavaScript Project</td>
+                    <td>April 5, 2025</td>
+                </tr>
+                <tr>
+                    <td>Biology</td>
+                    <td>Cell Structure Report</td>
+                    <td>April 10, 2025</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Submit Your Assignment</h2>
+        <form id="assignment-form">
+            <input type="text" id="student-name" placeholder="Enter your name" required>
+            <input type="text" id="assignment-title" placeholder="Assignment Title" required>
+            <input type="file" id="assignment-file" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Submitted Assignments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Assignment Title</th>
+                    <th>Submission Date</th>
+                </tr>
+            </thead>
+            <tbody id="submitted-table">
+                <!-- Submitted assignments will be displayed here -->
+            </tbody>
+        </table>
+    </div>
+
+    <a href="students.html" class="back-button">← Back to Student Section</a>
+
+    <script>
+        document.getElementById("assignment-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get user input values
+            const studentName = document.getElementById("student-name").value;
+            const assignmentTitle = document.getElementById("assignment-title").value;
+            const currentDate = new Date().toISOString().split('T')[0]; // Get today's date
+
+            if (studentName === "" || assignmentTitle === "") {
+                alert("Please enter your name and assignment title.");
+                return;
+            }
+
+            // Add submission to the table
+            const tableBody = document.getElementById("submitted-table");
+            const newRow = `<tr>
+                <td>${studentName}</td>
+                <td>${assignmentTitle}</td>
+                <td>${currentDate}</td>
+            </tr>`;
+
+            tableBody.innerHTML += newRow;
+
+            // Clear form fields after submission
+            document.getElementById("student-name").value = "";
+            document.getElementById("assignment-title").value = "";
+            document.getElementById("assignment-file").value = "";
+        });
+    </script>
+
+</body>
+</html>
+
