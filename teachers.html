@@ -5,21 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teachers - M.E.A</title>
     <link rel="stylesheet" href="styles/global.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        h1 {
+            color: #0073e6;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .feature {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0073e6;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <div id="root">
-        <h1>Teachers</h1>
-        <p>Welcome to the Teachers page. Here you can find information about our teachers.</p>
-        <img src="images/teachers.jpg" alt="Teachers Image" style="width:100%;height:auto;">
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="students.html">Students</a></li>
-                <li><a href="courses.html">Courses</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </nav>
+
+    <h1>Teachers</h1>
+    <p>Welcome to the Teachers section. Manage your classes and student interactions here.</p>
+    <img src="images/teachers.jpg" alt="Teachers Image" style="width:100%;height:auto;border-radius:10px;">
+
+    <div class="container">
+        <h2>Teacher Features</h2>
+
+        <div class="feature">
+            <h3>Manage Attendance</h3>
+            <p>Mark student attendance and keep track of class participation.</p>
+            <button onclick="manageAttendance()">Go to Attendance</button>
+        </div>
+
+        <div class="feature">
+            <h3>Grade Submission</h3>
+            <p>Enter and view student grades for assignments and exams.</p>
+            <button onclick="submitGrades()">Submit Grades</button>
+        </div>
+
+        <div class="feature">
+            <h3>Course Management</h3>
+            <p>Manage courses, upload materials, and update schedules.</p>
+            <button onclick="manageCourses()">Manage Courses</button>
+        </div>
+
+        <div class="feature">
+            <h3>Make Announcements</h3>
+            <p>Send important updates and announcements to students.</p>
+            <button onclick="makeAnnouncement()">Send Announcement</button>
+        </div>
     </div>
-    <script src="index.js"></script>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="students.html">Students</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        function manageAttendance() {
+            window.location.href = "attendance_management.html";
+        }
+        function submitGrades() {
+            window.location.href = "grade_submission.html";
+        }
+        function manageCourses() {
+            window.location.href = "course_management.html";
+        }
+        function makeAnnouncement() {
+            window.location.href = "announcements.html";
+        }
+    </script>
+
 </body>
 </html>
+
