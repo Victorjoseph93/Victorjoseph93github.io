@@ -5,12 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Students - M.E.A</title>
     <link rel="stylesheet" href="styles/global.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        h1 {
+            color: #0073e6;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #444;
+        }
+        .feature {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+    </style>
 </head>
 <body>
     <div id="root">
         <h1>Students</h1>
-        <p>Welcome to the Students page. Here you can find information about our students.</p>
-        <img src="images/students.jpg" alt="Students Image" style="width:100%;height:auto;">
+        <p>Welcome to the Students section. Manage your academic records and activities here.</p>
+        <img src="images/students.jpg" alt="Students Image" style="width:100%;height:auto;border-radius:10px;">
+        
+        <section id="student-features">
+            <h2>Student Features</h2>
+            <div class="feature">
+                <h3>View Grades</h3>
+                <p>Check your academic performance and grades for each course.</p>
+                <button onclick="viewGrades()">View Grades</button>
+            </div>
+            <div class="feature">
+                <h3>Attendance Tracker</h3>
+                <p>Keep track of your attendance and class participation.</p>
+                <button onclick="trackAttendance()">Track Attendance</button>
+            </div>
+            <div class="feature">
+                <h3>Course Enrollment</h3>
+                <p>Enroll in new courses and manage your class schedule.</p>
+                <button onclick="enrollCourses()">Enroll Now</button>
+            </div>
+            <div class="feature">
+                <h3>Assignments & Submissions</h3>
+                <p>Submit assignments and check deadlines for upcoming tasks.</p>
+                <button onclick="manageAssignments()">View Assignments</button>
+            </div>
+        </section>
+        
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -20,6 +83,20 @@
             </ul>
         </nav>
     </div>
+    <script>
+        function viewGrades() {
+            alert("Redirecting to your grades page.");
+        }
+        function trackAttendance() {
+            alert("Redirecting to your attendance record.");
+        }
+        function enrollCourses() {
+            alert("Redirecting to course enrollment page.");
+        }
+        function manageAssignments() {
+            alert("Redirecting to assignments page.");
+        }
+    </script>
     <script src="index.js"></script>
 </body>
 </html>
