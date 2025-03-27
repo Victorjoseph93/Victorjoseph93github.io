@@ -2,7 +2,7 @@
 FROM node:18
 
 # Set the working directory inside the container
-WORKDIR /root/Victorjoseph93github.io
+WORKDIR ./
 
 # Copy package.json and package-lock.json first
 COPY package*.json /root/Victorjoseph93github.io/mea-backend
