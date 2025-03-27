@@ -1,11 +1,10 @@
 const express = require("express");
-const { authenticateUser } = require("../middleware/auth"); // ✅ Ensure proper import
+const { authenticateUser } = require("../middleware/authMiddleware"); // Check this import!
 const Student = require("../models/Student");
 
 const router = express.Router();
 
-// ✅ Ensure `authenticateUser` is passed correctly as middleware
-router.get("/me", authenticateUser, async (req, res) => {
+router.get("/me", authenticateUser, async (req, res) => {  // Error might be here
     try {
         const student = await Student.findOne({ user: req.user.id }).populate("courses");
         if (!student) {

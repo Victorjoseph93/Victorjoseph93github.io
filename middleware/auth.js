@@ -1,10 +1,10 @@
 const express = require("express");
-const { authenticateUser } = require("../middleware/auth"); // ✅ Destructure import
+const { authenticateUser } = require("../middleware/authMiddleware"); //  Correct import
 const Student = require("../models/Student");
 
 const router = express.Router();
 
-// ✅ Ensure `authenticateUser` is used correctly as middleware
+// Correct usage of `authenticateUser`
 router.get("/me", authenticateUser, async (req, res) => {
     try {
         const student = await Student.findOne({ user: req.user.id }).populate("courses");
