@@ -51,40 +51,49 @@
         <img src="images/student.jpg" alt="Students Image" style="width:100%;height:auto;border-radius:10px;">
         
         <section id="student-features">
-            <h2>Student Features</h2>
-            <div class="feature">
-                <h3>View Grades</h3>
-                <p>Check your academic performance and grades for each course.</p>
-                <button onclick="location.href='grades.html'">View Grades</button>
-            </div>
-            <div class="feature">
-                <h3>Attendance Tracker</h3>
-                <p>Keep track of your attendance and class participation.</p>
-                <button onclick="location.href='attendance.html'">Track Attendance</button>
-            </div>
-            <div class="feature">
-                <h3>Course Enrollment</h3>
-                <p>Enroll in new courses and manage your class schedule.</p>
-                <button onclick="location.href='enrollment.html'">Enroll Now</button>
-            </div>
-            <div class="feature">
-                <h3>Assignments & Submissions</h3>
-                <p>Submit assignments and check deadlines for upcoming tasks.</p>
-                <button onclick="location.href='assignments.html'">View Assignments</button>
-            </div>
-        </section>
-        
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="teachers.html">Teachers</a></li>
-                <li><a href="courses.html">Courses</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </nav>
-    </div>
+		<h2>Student Dashboard</h2>
 
-    <script src="index.js"></script>
-</body>
-</html>
+<div class="dashboard">
+    <div class="card">
+        <h3>Grades</h3>
+        <p id="gradeStatus">Loading...</p>
+    </div>
+    <div class="card">
+        <h3>Attendance</h3>
+        <p id="attendanceStatus">Loading...</p>
+    </div>
+    <div class="card">
+        <h3>Assignments</h3>
+        <p id="assignmentStatus">Loading...</p>
+    </div>
+</div>
+
+<script>
+    async function loadDashboard() {
+        const token = localStorage.getItem("token");
+
+        // Fetch grades
+        const gradeResponse = await fetch("https://your-api.com/api/grades", {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        const grades = await gradeResponse.json();
+        document.getElementById("gradeStatus").textContent = `Latest Grade: ${grades.length > 0 ? grades[0].score : "No grades yet"}`;
+
+        // Fetch attendance
+        const attendanceResponse = await fetch("https://your-api.com/api/attendance", {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        const attendance = await attendanceResponse.json();
+        document.getElementById("attendanceStatus").textContent = `Total Present Days: ${attendance.length}`;
+
+        // Fetch assignments
+        const assignmentResponse = await fetch("https://your-api.com/api/assignments", {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        const assignments = await assignmentResponse.json();
+        document.getElementById("assignmentStatus").textContent = `Upcoming Assignments: ${assignments.length}`;
+    }
+
+    loadDashboard();
+</script>
 

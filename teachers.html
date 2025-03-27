@@ -68,57 +68,49 @@
     <img src="images/teachers.jpg" alt="Teachers Image" style="width:100%;height:auto;border-radius:10px;">
 
     <div class="container">
-        <h2>Teacher Features</h2>
+<h2>Teacher Dashboard</h2>
 
-        <div class="feature">
-            <h3>Manage Attendance</h3>
-            <p>Mark student attendance and keep track of class participation.</p>
-            <button onclick="manageAttendance()">Go to Attendance</button>
-        </div>
-
-        <div class="feature">
-            <h3>Grade Submission</h3>
-            <p>Enter and view student grades for assignments and exams.</p>
-            <button onclick="submitGrades()">Submit Grades</button>
-        </div>
-
-        <div class="feature">
-            <h3>Course Management</h3>
-            <p>Manage courses, upload materials, and update schedules.</p>
-            <button onclick="manageCourses()">Manage Courses</button>
-        </div>
-
-        <div class="feature">
-            <h3>Make Announcements</h3>
-            <p>Send important updates and announcements to students.</p>
-            <button onclick="makeAnnouncement()">Send Announcement</button>
-        </div>
+<div class="dashboard">
+    <div class="card">
+        <h3>New Assignments</h3>
+        <p id="newAssignments">Loading...</p>
     </div>
+    <div class="card">
+        <h3>Student Attendance</h3>
+        <p id="attendanceRecords">Loading...</p>
+    </div>
+    <div class="card">
+        <h3>Announcements</h3>
+        <p id="announcements">Loading...</p>
+    </div>
+</div>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="students.html">Students</a></li>
-            <li><a href="courses.html">Courses</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-    </nav>
+<script>
+    async function loadTeacherDashboard() {
+        const token = localStorage.getItem("token");
 
-    <script>
-        function manageAttendance() {
-            window.location.href = "attendance_management.html";
-        }
-        function submitGrades() {
-            window.location.href = "grade_submission.html";
-        }
-        function manageCourses() {
-            window.location.href = "course_management.html";
-        }
-        function makeAnnouncement() {
-            window.location.href = "announcements.html";
-        }
-    </script>
+        // Fetch new assignments
+        const assignmentResponse = await fetch("https://your-api.com/api/assignments/submissions", {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        const assignments = await assignmentResponse.json();
+        document.getElementById("newAssignments").textContent = `New Submissions: ${assignments.length}`;
 
-</body>
-</html>
+        // Fetch attendance
+        const attendanceResponse = await fetch("https://your-api.com/api/attendance", {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        const attendance = await attendanceResponse.json();
+        document.getElementById("attendanceRecords").textContent = `Total Attendance Records: ${attendance.length}`;
+
+        // Fetch announcements
+        const announcementResponse = await fetch("https://your-api.com/api/announcements", {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        const announcements = await announcementResponse.json();
+        document.getElementById("announcements").textContent = `Latest Announcement: ${announcements[0]?.message || "No announcements"}`;
+    }
+
+    loadTeacherDashboard();
+</script>
 

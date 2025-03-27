@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="styles/global.css">
+</head>
+<body>
+    <h1>Notifications</h1>
+    <div id="notifications-list"></div>
+
+    <script>
+        async function fetchNotifications() {
+            const token = localStorage.getItem("token");
+            const response = await fetch("/notifications/my-notifications", {
+                headers: { "Authorization": token }
+            });
+            const notifications = await response.json();
+
+            const notificationsList = document.getElementById("notifications-list");
+            notificationsList.innerHTML = notifications.map(notif => `
+                <div class="notification ${notif.read ? 'read' : 'unread'}">
+                    <p>${notif.message}</p>
+                    <small>From: ${notif.sender}</small>
+                    <button onclick="markAsRead('${notif._id}')">Mark as Read</button>
+                </div>
+            `).join("");
+        }
+
+        async function markAsRead(id) {
+            const token = localStorage.getItem("token");
+            await fetch(`/notifications/mark-as-read/${id}`, {
+                method: "PUT",
+                headers: { "Authorization": token }
+            });
+            fetchNotifications(); // Refresh notifications
+        }
+
+        fetchNotifications();
+    </script>
+</body>
+</html>
+
