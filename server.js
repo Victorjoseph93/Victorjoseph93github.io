@@ -2,12 +2,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const http = require("http");
+const socketIo = require("socket.io");
+const redis = require("redis");
 require("dotenv").config(); // Load environment variables
 
 // Initialize Express app
 const app = express();
+const server = http.createServer(app); // Required for socket.io
 
-// Middleware to handle JSON requests
+// Middleware
 app.use(express.json());
 app.use(cors());
 
@@ -23,73 +27,39 @@ if (!MONGO_URI) {
     process.exit(1);
 }
 
-// Connect to MongoDB (REMOVE deprecated options)
-mongoose.connect(MONGO_URI)
-    .then(() => console.log("✅  Connected to MongoDB"))
+// Connect to MongoDB (Ensuring a single connection)
+mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log("✅  Connected to MongoDB"))
     .catch(err => {
         console.error("❌  MongoDB connection error:", err);
         process.exit(1);
     });
 
-// Set the port
-const PORT = process.env.PORT || 9000;
+// Redis Client
+const redisClient = redis.createClient();
+redisClient.on("error", (err) => console.error("Redis Error:", err));
+redisClient.connect();
 
-// Check if the port is free before starting the server
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-});
-app.use("/api/auth", require("./routes/auth"))
+// API Routes
+app.use("/api/auth", require("./routes/auth"));
 app.use("/api/students", require("./routes/students"));
 app.use("/api/teachers", require("./routes/teachers"));
 app.use("/api/courses", require("./routes/courses"));
 app.use("/api/attendance", require("./routes/attendance"));
 app.use("/api/assignments", require("./routes/assignments"));
 app.use("/api/notifications", require("./routes/notifications"));
-app.use("/api/auth", require("./routes/auth"));
-const redis = require("redis");
-const client = redis.createClient();
 
-client.on("error", (err) => console.error("Redis Error:", err));
-client.connect();
-const mongoose = require("mongoose");
-
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    poolSize: 10  // Maintain up to 10 connections
-}).then(() => console.log("MongoDB Connected"))
-.catch(err => console.error("DB Connection Error:", err));
-const userRole = localStorage.getItem("role"); // Retrieve role from local storage
-
-// Hide admin-only features if the user is not an admin
-if (userRole !== "admin") {
-    document.getElementById("adminPanel").style.display = "none";
-}
-
-// Hide teacher-only features if the user is not a teacher
-if (userRole !== "teacher" && userRole !== "admin") {
-    document.getElementById("teacherFeatures").style.display = "none";
-}
-async function updateNotificationCount() {
-    const token = localStorage.getItem("token");
-    const response = await fetch("/notifications/my-notifications", {
-        headers: { "Authorization": token }
-    });
-    const notifications = await response.json();
-    const unreadCount = notifications.filter(n => !n.read).length;
-
-    document.getElementById("notification-badge").innerText = unreadCount || "";
-}
-
-// Run function when page loads
-updateNotificationCount();
-<li><a href="notifications.html">Notifications <span id="notification-badge"></span></a></li>
-const io = require("socket.io")(server, { cors: { origin: "*" } });
+// Socket.io Setup
+const io = socketIo(server, { cors: { origin: "*" } });
 
 io.on("connection", (socket) => {
     console.log("User connected:", socket.id);
 
     socket.on("sendNotification", async ({ recipientId, message }) => {
+        // Save notification to DB (assuming Notification model exists)
+        const Notification = require("./models/Notification");
         const notification = new Notification({ sender: socket.userId, recipient: recipientId, message });
         await notification.save();
 
@@ -100,22 +70,9 @@ io.on("connection", (socket) => {
         console.log("User disconnected:", socket.id);
     });
 });
-const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
-    email: { type: String, required: true, unique: true, index: true }, // Adding index
+// Port Configuration
+const PORT = process.env.PORT || 9000;
+server.listen(PORT, () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
 });
-Optimize Database Queries
-Use .select() to only fetch necessary fields.
-	const user = await User.findById(req.user._id).select("name email");
-const redis = require("redis");
-const client = redis.createClient();
-
-async function getCachedData(key, fetchFunction) {
-    const cached = await client.get(key);
-    if (cached) return JSON.parse(cached);
-
-    const data = await fetchFunction();
-    await client.set(key, JSON.stringify(data), { EX: 3600 }); // Cache for 1 hour
-    return data;
-}
