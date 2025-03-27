@@ -1,3 +1,5 @@
+require("dotenv").config();
+console.log("MONGO_URI:", process.env.MONGO_URI); // Debugging line
 // Import required modules
 const express = require("express");
 const mongoose = require("mongoose");
