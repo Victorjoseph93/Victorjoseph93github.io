@@ -1,34 +1,22 @@
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const express = require("express");
+const { authenticateUser } = require("../middleware/auth"); // ✅ Destructure import
+const Student = require("../models/Student");
 
-// Middleware to verify JWT token
-const authenticateUser = async (req, res, next) => {
-    const token = req.header("Authorization") || req.header("x-auth-token");
+const router = express.Router();
 
-    if (!token) {
-        return res.status(401).json({ message: "Access Denied. No Token Provided." });
-    }
-
+// ✅ Ensure `authenticateUser` is used correctly as middleware
+router.get("/me", authenticateUser, async (req, res) => {
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = await User.findById(decoded.id).select("-password"); // Attach user info to request
-        if (!req.user) {
-            return res.status(401).json({ message: "User not found" });
+        const student = await Student.findOne({ user: req.user.id }).populate("courses");
+        if (!student) {
+            return res.status(400).json({ msg: "Student profile not found" });
         }
-        next();
-    } catch (error) {
-        res.status(401).json({ message: "Invalid Token" });
+        res.json(student);
+    } catch (err) {
+        console.error("Error fetching student profile:", err.message);
+        res.status(500).send("Server Error");
     }
-};
+});
 
-// Middleware to check if user has the required role
-const authorizeRole = (roles) => {
-    return (req, res, next) => {
-        if (!roles.includes(req.user.role)) {
-            return res.status(403).json({ message: "Access Denied. Insufficient Permissions." });
-        }
-        next();
-    };
-};
+module.exports = router;
 
-module.exports = { authenticateUser, authorizeRole };
