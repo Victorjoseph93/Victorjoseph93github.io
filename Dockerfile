@@ -5,7 +5,8 @@ FROM node:18
 WORKDIR /app
 
 # Copy package.json and package-lock.json first
-COPY package*.json ./
+COPY package*.json /root/Victorjoseph93github.io/mea-backend
+
 
 # Install dependencies
 RUN npm install --omit=dev
@@ -14,7 +15,7 @@ RUN npm install --omit=dev
 COPY . .
 
 # Expose the port
-EXPOSE 3000
+EXPOSE 9000
 
 # Start the application
 CMD ["node", "server.js"]
