@@ -1,7 +1,6 @@
 const express = require("express");
-const auth = require("../middleware/auth");
+const auth = require("../middleware/auth"); // Ensure this is correctly exported
 const Student = require("../models/Student");
-const User = require("../models/User");
 
 const router = express.Router();
 
@@ -26,17 +25,14 @@ router.post("/enroll/:courseId", auth, async (req, res) => {
     try {
         let student = await Student.findOne({ user: req.user.id });
 
-        // Create a student profile if it doesn't exist
         if (!student) {
             student = new Student({ user: req.user.id, courses: [] });
         }
 
-        // Check if student is already enrolled
         if (student.courses.includes(req.params.courseId)) {
             return res.status(400).json({ msg: "Already enrolled in this course" });
         }
 
-        // Enroll the student
         student.courses.push(req.params.courseId);
         await student.save();
 
@@ -47,5 +43,5 @@ router.post("/enroll/:courseId", auth, async (req, res) => {
     }
 });
 
-// ✅ Export the router
+// ✅ Export router
 module.exports = router;
